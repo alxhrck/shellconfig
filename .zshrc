@@ -1,4 +1,4 @@
-export ZSH=/home/alex/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 ZSH_THEME="bira"
 DISABLE_AUTO_UPDATE="true"
 HIST_STAMPS="yyyy-mm-dd"
