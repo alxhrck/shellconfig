@@ -4,3 +4,5 @@ if [ -f /usr/bin/vim.tiny ]; then
 fi
 
 alias arm="sudo -u debian-tor arm"
+
+alias ip="ifconfig | grep -o 'inet\s.*' --color=never"
