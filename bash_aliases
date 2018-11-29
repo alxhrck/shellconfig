@@ -7,6 +7,10 @@ if [ -f /usr/bin/arm ]; then
 	alias arm="sudo -u debian-tor arm"
 fi
 
+if [ -f /usr/bin/knife ]; then
+	alias knife="sudo knife"
+fi
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
