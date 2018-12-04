@@ -3,11 +3,10 @@ if [ -f /usr/bin/vim.tiny ]; then
   alias vim="vim.tiny"
 fi
 
-<<<<<<< HEAD
 alias arm="sudo -u debian-tor arm"
 
 alias ip="ifconfig | grep -o 'inet\s.*' --color=never"
-=======
+
 if [ -f /usr/bin/arm ]; then
 	alias arm="sudo -u debian-tor arm"
 fi
@@ -39,4 +38,3 @@ alias l='ls -CF'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
->>>>>>> 391c906c1ffc2621da7f8f7ac02d080d517e1f20
