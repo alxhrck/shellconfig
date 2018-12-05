@@ -27,8 +27,16 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+# Print out group info given the dn. Try adgroup Role-Automation
+adgroup() {
+  ldapsearch -o ldif-wrap=no -LLL -Y GSSAPI -h ch1dc02.uptake.com -s sub -b 'dc=uptake,dc=com' "sAMAccountName=$@" "member"
+}
+
+# Print out user info given given a first initial last name like jdoe
+aduser() {
+  ldapsearch -o ldif-wrap=no -LLL -Y GSSAPI -h ch1dc02.uptake.com -s sub -b 'dc=uptake,dc=com' "sAMAccountName=$@" "memberOf"
+}
+
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -38,3 +46,7 @@ alias l='ls -CF'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+
+# colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
