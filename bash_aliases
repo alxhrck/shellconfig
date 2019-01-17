@@ -29,12 +29,12 @@ fi
 
 # Print out group info given the dn. Try adgroup Role-Automation
 adgroup() {
-  ldapsearch -o ldif-wrap=no -LLL -Y GSSAPI -h ch1dc02.uptake.com -s sub -b 'dc=uptake,dc=com' "sAMAccountName=$@" "member"
+  ldapsearch -o ldif-wrap=no -LLL -Y GSSAPI -h $DC -s sub -b $(echo $DC |awk '{split($0,a,"."); out="dc=" a[2] "," "dc=" a[3]; print out}') "sAMAccountName=$@" "member"
 }
 
 # Print out user info given given a first initial last name like jdoe
 aduser() {
-  ldapsearch -o ldif-wrap=no -LLL -Y GSSAPI -h ch1dc02.uptake.com -s sub -b 'dc=uptake,dc=com' "sAMAccountName=$@" "memberOf"
+  ldapsearch -o ldif-wrap=no -LLL -Y GSSAPI -h $DC -s sub -b $(echo $DC |awk '{split($0,a,"."); out="dc=" a[2] "," "dc=" a[3]; print out}')   "sAMAccountName=$@" "memberOf"
 }
 
 
