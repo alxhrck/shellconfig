@@ -95,3 +95,7 @@ fi
 if [ -z "$TMUX" ]; then
     tmux attach -t default || tmux new -s default
 fi
+
+get_cloud(){ aws ec2 run-instances --image-id ami-07ebfd5b3428b6f4d --count 1 --instance-type t2.micro --key-name id_rsa --security-group-ids sg-082709f18cb9283fa sg-05c863fa9095fced2 --subnet-id subnet-58fc582f --region us-east-1 --tag-specifications "ResourceType=instance,Tags=[{Key=type,Value=cow_goes_moo}]" &> /dev/null; }
+set_cloud(){ IFS=" " read -r INSTANCEID INSTANCEIP <<< $(aws ec2 describe-instances --region us-east-1| jq -r '.Reservations[] | select(.Instances[].Tags[].Value=="cow_goes_moo" and .Instances[].State.Name!="terminated") | .Instances[].InstanceId + " " + .Instances[].PublicIpAddress' 2> /dev/null); export INSTANCEID INSTANCEIP; }
+kill_cloud(){ aws ec2 terminate-instances --instance-ids $INSTANCEID --region us-east-1 2>/dev/null| jq -r '.TerminatingInstances[] | .CurrentState.Name + " " + .InstanceId'; unset INSTANCEID INSTANCEIP; }
